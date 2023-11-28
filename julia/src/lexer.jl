@@ -1,7 +1,4 @@
-module Lexer
-
-include("tokens.jl")
-using .Tokens
+include("./token.jl")
 
 is_letter(ch) = isletter(ch) || ch == '_'
 
@@ -35,33 +32,33 @@ function next_token(lexer::LexerState)
     end
 
     # Analyze the current character and return the appropriate token
-    tok = Token(ILLEGAL(), "")
+    tok = Token(ILLEGAL, "")
     if lexer.ch == '='
-        tok = Token(ASSIGN(), string(lexer.ch))
+        tok = Token(ASSIGN, string(lexer.ch))
     elseif lexer.ch == '+'
-        tok = Token(PLUS(), string(lexer.ch))
+        tok = Token(PLUS, string(lexer.ch))
     elseif lexer.ch == ','
-        tok = Token(COMMA(), string(lexer.ch))
+        tok = Token(COMMA, string(lexer.ch))
     elseif lexer.ch == ';'
-        tok = Token(SEMICOLON(), string(lexer.ch))
+        tok = Token(SEMICOLON, string(lexer.ch))
     elseif lexer.ch == '('
-        tok = Token(LPAREN(), string(lexer.ch))
+        tok = Token(LPAREN, string(lexer.ch))
     elseif lexer.ch == ')'
-        tok = Token(RPAREN(), string(lexer.ch))
+        tok = Token(RPAREN, string(lexer.ch))
     elseif lexer.ch == '{'
-        tok = Token(LBRACE(), string(lexer.ch))
+        tok = Token(LBRACE, string(lexer.ch))
     elseif lexer.ch == '}'
-        tok = Token(RBRACE(), string(lexer.ch))
+        tok = Token(RBRACE, string(lexer.ch))
     elseif is_letter(lexer.ch)
         literal = read_identifier(lexer)
-        tok = Token(IDENT(), literal)
+        tok = Token(IDENT, literal)
     elseif isdigit(lexer.ch)
         literal = read_number(lexer)
-        tok = Token(INT(), literal)
+        tok = Token(INT, literal)
     elseif lexer.ch == '\0'
-        tok = Token(EOF(), "")
+        tok = Token(EOF, "")
     else
-        tok = Token(ILLEGAL(), string(lexer.ch))
+        tok = Token(ILLEGAL, string(lexer.ch))
     end
 
     read_char(lexer)
@@ -85,5 +82,3 @@ function read_number(lexer::LexerState)
 end
 
 export LexerState, next_token
-
-end # module Lexer
