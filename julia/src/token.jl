@@ -1,21 +1,25 @@
-const TokenType = String
+module Tokens
 
-const ILLEGAL = "ILLEGAL"
-const EOF = "EOF"
-const IDENT = "IDENT"
-const INT = "INT"
-const ASSIGN = "="
-const PLUS = "+"
-const COMMA = ","
-const SEMICOLON = ";"
-const LPAREN = "("
-const RPAREN = ")"
-const LBRACE = "{"
-const RBRACE = "}"
+export Token
 
-struct Token
-    Type::TokenType
-    Literal::String
+@enum(TokenType,
+	ILLEGAL,
+	EOF, IDENT,
+	INT, ASSIGN,
+	PLUS,
+	COMMA,
+	SEMICOLON, LPAREN,
+	RPAREN,
+	LBRACE,
+	RBRACE, FUNCTION,
+	LET,
+)
+
+abstract type AbstractToken end
+
+struct Token <: AbstractToken
+	Type::TokenType
+	Literal::String
 end
 
-export ILLEGAL, EOF, IDENT, INT, ASSIGN, PLUS, COMMA, SEMICOLON, LPAREN, RPAREN, LBRACE, RBRACE, Token
+end
