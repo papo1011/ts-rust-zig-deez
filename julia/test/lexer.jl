@@ -40,7 +40,12 @@ end
 	let result = add(five, ten);
    	!-/*5;
     5 < 10 > 5;
-	"""
+
+   	if (5 < 10) {
+   		return true;
+   	} else {
+   		return false;
+   	}"""
 	
 	tests = [
 		(Tokens.LET, "let"),
@@ -91,6 +96,23 @@ end
 		(Tokens.GT, ">"),
 		(Tokens.INT, "5"),
 		(Tokens.SEMICOLON, ";"),
+		(Tokens.IF, "if"),
+		(Tokens.LPAREN, "("),
+		(Tokens.INT, "5"),
+		(Tokens.LT, "<"),
+		(Tokens.INT, "10"),
+		(Tokens.RPAREN, ")"),
+		(Tokens.LBRACE, "{"),
+		(Tokens.RETURN, "return"),
+		(Tokens.TRUE, "true"),
+		(Tokens.SEMICOLON, ";"),
+		(Tokens.RBRACE, "}"),
+		(Tokens.ELSE, "else"),
+		(Tokens.LBRACE, "{"),
+		(Tokens.RETURN, "return"),
+		(Tokens.FALSE, "false"),
+		(Tokens.SEMICOLON, ";"),
+		(Tokens.RBRACE, "}"),
 		(Tokens.EOF, ""),
 	]
 

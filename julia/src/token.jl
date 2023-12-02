@@ -32,6 +32,11 @@ export Token, lookup_ident
 	begin_keywords,
 		FUNCTION, # fn
 		LET, # let
+		TRUE, # true
+		FALSE, # false
+		IF, # if
+		ELSE, # else
+		RETURN, # return
 	end_keywords,
 )
 
@@ -44,7 +49,12 @@ end
 
 keywords = Dict{String, TokenType}(
     "fn" => FUNCTION,
-    "let" => LET
+    "let" => LET,
+	"true" => TRUE,
+	"false" => FALSE,
+	"if" => IF,
+	"else" => ELSE,
+	"return" => RETURN,
 )
 
 function lookup_ident(ident::String)
