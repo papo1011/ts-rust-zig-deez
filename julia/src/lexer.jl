@@ -1,9 +1,11 @@
 module Lexers
 
 import ..Tokens
-import ..Tokens: Token
+import ..Tokens: Token, lookup_ident
 
-is_letter(ch) = isletter(ch) || ch == '_'
+function is_letter(ch::Char)
+    return ('a' <= ch <= 'z') || ('A' <= ch <= 'Z') || ch == '_'
+end
 
 mutable struct Lexer
 	input::String
@@ -29,10 +31,8 @@ function read_char(lexer::Lexer)
 end
 
 function next_token(lexer::Lexer)
-	while lexer.ch == ' ' || lexer.ch == '\t' || lexer.ch == '\n' || lexer.ch == '\r'
-		read_char(lexer)
-	end
-
+	skip_whitespace(lexer)
+	
 	tok = Token(Tokens.ILLEGAL, "")
 	if lexer.ch == '='
 		tok = Token(Tokens.ASSIGN, string(lexer.ch))
@@ -52,10 +52,13 @@ function next_token(lexer::Lexer)
 		tok = Token(Tokens.RBRACE, string(lexer.ch))
 	elseif is_letter(lexer.ch)
 		literal = read_identifier(lexer)
-		tok = Token(Tokens.IDENT, literal)
+		type = lookup_ident(literal)
+		tok = Token(type, literal)
+		return tok
 	elseif isdigit(lexer.ch)
 		literal = read_number(lexer)
 		tok = Token(Tokens.INT, literal)
+		return tok
 	elseif lexer.ch == '\0'
 		tok = Token(Tokens.EOF, "")
 	else
@@ -80,6 +83,12 @@ function read_number(lexer::Lexer)
 		read_char(lexer)
 	end
 	return lexer.input[start+1:lexer.position]
+end
+
+function  skip_whitespace(lexer::Lexer)
+	while lexer.ch == ' ' || lexer.ch == '\t' || lexer.ch == '\n' || lexer.ch == '\r'
+		read_char(lexer)
+	end
 end
 
 end
