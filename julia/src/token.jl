@@ -4,19 +4,35 @@ export Token, lookup_ident
 
 @enum(TokenType,
 	ILLEGAL,
-	EOF, 
+	EOF,
+
 	IDENT,
-	INT, 
-	ASSIGN,
-	PLUS,
-	COMMA,
-	SEMICOLON, 
-	LPAREN,
-	RPAREN,
-	LBRACE,
-	RBRACE,
-	FUNCTION,
-	LET,
+	INT,
+
+	begin_operators,
+		ASSIGN, # =
+		PLUS, # +
+    	MINUS, # -
+    	BANG, # !
+    	ASTERISK, # *
+    	SLASH, # /
+    	LT, # <
+    	GT, # >
+	end_operators,
+
+	begin_delimiters,
+		COMMA, # ,
+		SEMICOLON, # ;
+		LPAREN, # (
+		RPAREN, # )
+		LBRACE, # {
+		RBRACE, # }
+	end_delimiters,
+	
+	begin_keywords,
+		FUNCTION, # fn
+		LET, # let
+	end_keywords,
 )
 
 abstract type AbstractToken end

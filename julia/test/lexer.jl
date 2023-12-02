@@ -38,6 +38,8 @@ end
 	};
 
 	let result = add(five, ten);
+   	!-/*5;
+    5 < 10 > 5;
 	"""
 	
 	tests = [
@@ -76,6 +78,18 @@ end
 		(Tokens.COMMA, ","),
 		(Tokens.IDENT, "ten"),
 		(Tokens.RPAREN, ")"),
+		(Tokens.SEMICOLON, ";"),
+		(Tokens.BANG, "!"),
+		(Tokens.MINUS, "-"),
+		(Tokens.SLASH, "/"),
+		(Tokens.ASTERISK, "*"),
+		(Tokens.INT, "5"),
+		(Tokens.SEMICOLON, ";"),
+		(Tokens.INT, "5"),
+		(Tokens.LT, "<"),
+		(Tokens.INT, "10"),
+		(Tokens.GT, ">"),
+		(Tokens.INT, "5"),
 		(Tokens.SEMICOLON, ";"),
 		(Tokens.EOF, ""),
 	]

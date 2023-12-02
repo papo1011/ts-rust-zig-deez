@@ -38,6 +38,18 @@ function next_token(lexer::Lexer)
 		tok = Token(Tokens.ASSIGN, string(lexer.ch))
 	elseif lexer.ch == '+'
 		tok = Token(Tokens.PLUS, string(lexer.ch))
+	elseif lexer.ch == '-'
+		tok = Token(Tokens.MINUS, string(lexer.ch))
+	elseif lexer.ch == '!'
+		tok = Token(Tokens.BANG, string(lexer.ch))
+	elseif lexer.ch == '*'
+		tok = Token(Tokens.ASTERISK, string(lexer.ch))
+	elseif lexer.ch == '/'
+		tok = Token(Tokens.SLASH, string(lexer.ch))
+	elseif lexer.ch == '<'
+		tok = Token(Tokens.LT, string(lexer.ch))
+	elseif lexer.ch == '>'
+		tok = Token(Tokens.GT, string(lexer.ch))
 	elseif lexer.ch == ','
 		tok = Token(Tokens.COMMA, string(lexer.ch))
 	elseif lexer.ch == ';'
