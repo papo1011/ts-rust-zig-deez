@@ -45,7 +45,11 @@ end
    		return true;
    	} else {
    		return false;
-   	}"""
+   	}
+	
+   	10 == 10;
+    10 != 9;
+	"""
 	
 	tests = [
 		(Tokens.LET, "let"),
@@ -113,6 +117,14 @@ end
 		(Tokens.FALSE, "false"),
 		(Tokens.SEMICOLON, ";"),
 		(Tokens.RBRACE, "}"),
+		(Tokens.INT, "10"),
+		(Tokens.EQ, "=="),
+		(Tokens.INT, "10"),
+		(Tokens.SEMICOLON, ";"),
+		(Tokens.INT, "10"),
+		(Tokens.NOT_EQ, "!="),
+		(Tokens.INT, "9"),
+		(Tokens.SEMICOLON, ";"),
 		(Tokens.EOF, ""),
 	]
 

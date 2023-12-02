@@ -35,13 +35,27 @@ function next_token(lexer::Lexer)
 	
 	tok = Token(Tokens.ILLEGAL, "")
 	if lexer.ch == '='
-		tok = Token(Tokens.ASSIGN, string(lexer.ch))
+		if peek_char(lexer) == '='
+			ch = lexer.ch
+			read_char(lexer)
+			literal = string(ch, lexer.ch)
+			tok = Token(Tokens.EQ, literal)
+		else
+			tok = Token(Tokens.ASSIGN, string(lexer.ch))
+		end
 	elseif lexer.ch == '+'
 		tok = Token(Tokens.PLUS, string(lexer.ch))
 	elseif lexer.ch == '-'
 		tok = Token(Tokens.MINUS, string(lexer.ch))
 	elseif lexer.ch == '!'
-		tok = Token(Tokens.BANG, string(lexer.ch))
+		if peek_char(lexer) == '='
+			ch = lexer.ch
+			read_char(lexer)
+			literal = string(ch, lexer.ch)
+			tok = Token(Tokens.NOT_EQ, literal)
+		else
+			tok = Token(Tokens.BANG, string(lexer.ch))
+		end
 	elseif lexer.ch == '*'
 		tok = Token(Tokens.ASTERISK, string(lexer.ch))
 	elseif lexer.ch == '/'
@@ -103,4 +117,15 @@ function  skip_whitespace(lexer::Lexer)
 	end
 end
 
+"""
+	Peek at the next character in the input without advancing the lexer.
+"""
+function peek_char(lexer::Lexer)
+	if lexer.read_position >= length(lexer.input)
+		return '\0'
+	else
+		return lexer.input[lexer.read_position+1]
+	end
+end
+	
 end

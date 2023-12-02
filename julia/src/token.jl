@@ -18,6 +18,8 @@ export Token, lookup_ident
     	SLASH, # /
     	LT, # <
     	GT, # >
+		EQ, # ==
+		NOT_EQ, # !=
 	end_operators,
 
 	begin_delimiters,
