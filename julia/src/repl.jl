@@ -3,13 +3,11 @@ module REPL
 import ..Lexers
 import ..Tokens
 
-const PROMPT = ">> "
-
 export start
 
 function start(instream::IO)
     while true
-        print(PROMPT)
+        print(">>")
         line = readline(instream)
         if line === nothing
             break
@@ -17,7 +15,7 @@ function start(instream::IO)
 
         l = Lexers.Lexer(line)
         while true
-            tok = Lexers.next_token(l)
+            tok = Lexers.next_token!(l)
             if tok.Type == Tokens.EOF
                 break
             end

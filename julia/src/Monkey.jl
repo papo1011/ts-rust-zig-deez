@@ -8,10 +8,6 @@ import .Lexers
 import .Tokens
 import .REPL
 
-function main()
-    REPL.start(stdin)
-end
-
-main()
+REPL.start(stdin)
 
 end
