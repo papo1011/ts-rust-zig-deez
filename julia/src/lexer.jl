@@ -3,6 +3,8 @@ module Lexers
 import ..Tokens
 import ..Tokens: Token, lookup_ident
 
+export Lexer, next_token!
+
 mutable struct Lexer
     input::String
     position::Int

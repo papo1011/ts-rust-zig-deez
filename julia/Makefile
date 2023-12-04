@@ -48,5 +48,5 @@ test-ast:
 
 test-parser:
 	@echo "===> Testing parser"
-	@echo "Parser not implemented yet"
+	julia ./test/parser.jl
 
