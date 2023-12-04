@@ -19,6 +19,10 @@ docker-ready: docker-build
 # Update those:
 ##
 
+run:
+	@echo "===> Running Monkey REPL"
+	julia ./src/Monkey.jl
+
 clean:
 	@echo "===> Cleaning"
 	@echo "Cleaning not implemented yet"
