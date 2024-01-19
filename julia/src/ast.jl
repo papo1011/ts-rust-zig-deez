@@ -23,7 +23,6 @@ struct LetStatement <: Statement
     name::Identifier
     value::Expression
 end
-
 function LetStatement(token::Token)
     stmt = LetStatement(token, Identifier(token, ""), Identifier(token, ""))
     return stmt

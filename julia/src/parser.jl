@@ -20,17 +20,17 @@ end
 
 function next_token!(p::Parser)
     p.cur_token = p.peek_token
-    p.peek_token = next_token(p.lexer)
+    p.peek_token = next_token!(p.lexer)
 end
 
 function parse_let_statement(p::Parser)
-    stmt = LetStatement(p.cur_token)
+    token = p.cur_token
 
     if !expect_peek(p, Tokens.IDENT)
         return nothing
     end
 
-    stmt.name = Identifier(p.cur_token, p.cur_token.literal)
+    name = Identifier(p.cur_token, p.cur_token.Literal)
 
     if !expect_peek(p, Tokens.ASSIGN)
         return nothing
@@ -40,7 +40,7 @@ function parse_let_statement(p::Parser)
         next_token!(p)
     end
 
-    return stmt
+    return LetStatement(token, name, Identifier(token, ""))
 end
 
 function parse_statement(p::Parser)
@@ -63,6 +63,23 @@ function parse_program(p::Parser)
     end
 
     return program
+end
+
+function cur_token_is(p::Parser, t::Tokens.TokenType)
+    return p.cur_token.Type == t
+end
+
+function peek_token_is(p::Parser, t::Tokens.TokenType)
+    return p.peek_token.Type == t
+end
+
+function expect_peek(p::Parser, t::Tokens.TokenType)
+    if peek_token_is(p, t)
+        next_token!(p)
+        return true
+    else
+        return false
+    end
 end
 
 end

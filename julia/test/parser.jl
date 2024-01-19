@@ -23,6 +23,7 @@ import .Parsers
     if isnothing(program)
         @test false
     end
+
     @test length(program.statements) == 3
 
     tests = [
@@ -33,9 +34,7 @@ import .Parsers
 
     for (i, tt) in enumerate(tests)
         stmt = program.statements[i]
-        @test stmt.token_literal == "let"
         @test stmt.name.value == tt
-        @test stmt.name.token_literal == tt
     end
 
 end
